@@ -46,7 +46,6 @@ const Index = () => {
 
   const [coordinates1, setCoordinates1] = useState<Coordinates | null>(null);
   const [coordinates2, setCoordinates2] = useState<Coordinates | null>(null);
-  console.log("1", coordinates1, "2", coordinates2);
 
   const handleCekiButtonClick = () => {
     if (useResultRef.current) {
