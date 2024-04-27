@@ -1,5 +1,11 @@
 import React, { useRef, useState } from "react";
-import { ArrowForwardIos, Commit, East, West } from "@mui/icons-material";
+import {
+  ArrowForwardIos,
+  Commit,
+  East,
+  ImportExport,
+  West,
+} from "@mui/icons-material";
 import { useEffect } from "react";
 import axios from "axios";
 import {
@@ -14,6 +20,7 @@ import {
 } from "@mui/material";
 import { getLatLon, Coordinates } from "../utils/getLatLon";
 import { calculateDistance } from "../utils/calculateDistance";
+import { useMediaQuery } from "@mui/material";
 
 const Index = () => {
   const useResultRef = useRef<HTMLDivElement>(null);
@@ -242,28 +249,48 @@ const Index = () => {
     desa2Name,
   ]);
 
+  const isSmallScreen = useMediaQuery("(max-width: 900px)");
+
   return (
     <Box>
       <Box display={"flex"} justifyContent={"center"}>
-        <img width={650} src="/CEKI.gif" alt="Cekdist Logo"></img>
+        <img
+          style={isSmallScreen ? { width: 250 } : { width: 650 }}
+          src="/CEKI.gif"
+          alt="Cekdist Logo"
+        ></img>
       </Box>
       <Box display={"flex"} mt={3} justifyContent={"center"}>
         <Typography
-          variant="h5"
+          variant={isSmallScreen ? "h8" : "h5"}
+          px={isSmallScreen ? 4 : 0}
           textAlign={"center"}
           fontFamily="Outfit"
           color="text.primary"
         >
-          Instrumen mempesona yang dianugerahi dengan kemampuan mistis untuk{" "}
+          Instrumen mempesona yang dianugerahi dengan kemampuan mistis untuk
+          memastikan
           <br />
-          memastikan pemisahan spasial antara dua titik yang ditentukan.
+          pemisahan spasial antara dua titik yang ditentukan.
         </Typography>
       </Box>
-      <Box display={"flex"} mt={6} justifyContent={"center"}>
-        <Box display={"flex"} mr={4} flexDirection={"column"}>
-          <FormControl sx={{ width: 350 }} fullWidth focused>
+      <Box
+        display={"flex"}
+        mt={6}
+        flexDirection={isSmallScreen ? "column" : "row"}
+        justifyContent={"center"}
+        alignItems={isSmallScreen ? "center" : "normal"}
+      >
+        <Box
+          sx={isSmallScreen ? { width: 350 } : { width: 350 }}
+          display={"flex"}
+          mr={isSmallScreen ? 0 : 4}
+          flexDirection={"column"}
+        >
+          <FormControl fullWidth focused>
             <InputLabel color="secondary">Provinsi 1</InputLabel>
             <Select
+              size={isSmallScreen ? "small" : "medium"}
               value={provinsi1}
               onChange={(event) => {
                 setProvinsi1(event.target.value);
@@ -289,6 +316,7 @@ const Index = () => {
           <FormControl sx={{ mt: 2 }} fullWidth focused>
             <InputLabel color="secondary">Kota/Kabupaten 1</InputLabel>
             <Select
+              size={isSmallScreen ? "small" : "medium"}
               value={kota1}
               onChange={(event) => {
                 setKota1(event.target.value);
@@ -313,6 +341,7 @@ const Index = () => {
           <FormControl sx={{ mt: 2 }} fullWidth focused>
             <InputLabel color="secondary">Kecamatan 1</InputLabel>
             <Select
+              size={isSmallScreen ? "small" : "medium"}
               value={kecamatan1}
               onChange={(event) => setKecamatan1(event.target.value)}
               color="secondary"
@@ -333,6 +362,7 @@ const Index = () => {
           <FormControl sx={{ mt: 2 }} fullWidth focused>
             <InputLabel color="secondary">Desa/Kelurahan 1</InputLabel>
             <Select
+              size={isSmallScreen ? "small" : "medium"}
               value={desa1}
               onChange={(event) => setDesa1(event.target.value)}
               color="secondary"
@@ -352,18 +382,28 @@ const Index = () => {
           </FormControl>
         </Box>
         <Box
+          py={isSmallScreen ? 2 : 0}
           sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <ArrowForwardIos fontSize="large" />
+          {isSmallScreen ? (
+            <ImportExport fontSize="medium" />
+          ) : (
+            <ArrowForwardIos fontSize="large" />
+          )}
         </Box>
-        <Box ml={4} display={"flex"} flexDirection={"column"}>
+        <Box
+          sx={isSmallScreen ? { width: 350 } : { width: 350, ml: 4 }}
+          display={"flex"}
+          flexDirection={"column"}
+        >
           <FormControl sx={{ width: 350 }} fullWidth focused>
             <InputLabel color="secondary">Provinsi 2</InputLabel>
             <Select
+              size={isSmallScreen ? "small" : "medium"}
               value={provinsi2}
               onChange={(event) => {
                 setProvinsi2(event.target.value);
@@ -389,6 +429,7 @@ const Index = () => {
           <FormControl sx={{ mt: 2 }} fullWidth focused>
             <InputLabel color="secondary">Kota/Kabupaten 2</InputLabel>
             <Select
+              size={isSmallScreen ? "small" : "medium"}
               value={kota2}
               onChange={(event) => {
                 setKota2(event.target.value);
@@ -413,6 +454,7 @@ const Index = () => {
           <FormControl sx={{ mt: 2 }} fullWidth focused>
             <InputLabel color="secondary">Kecamatan 2</InputLabel>
             <Select
+              size={isSmallScreen ? "small" : "medium"}
               value={kecamatan2}
               onChange={(event) => setKecamatan2(event.target.value)}
               color="secondary"
@@ -433,6 +475,7 @@ const Index = () => {
           <FormControl sx={{ mt: 2 }} fullWidth focused>
             <InputLabel color="secondary">Desa/Kelurahan 2</InputLabel>
             <Select
+              size={isSmallScreen ? "small" : "medium"}
               value={desa2}
               onChange={(event) => setDesa2(event.target.value)}
               color="secondary"
@@ -454,6 +497,7 @@ const Index = () => {
       </Box>
       <Box mt={2} display={"flex"} justifyContent={"center"}>
         <Button
+          size={isSmallScreen ? "small" : "medium"}
           variant="contained"
           color="secondary"
           onClick={async () => {
@@ -462,8 +506,8 @@ const Index = () => {
           }}
           sx={{
             fontFamily: "Outfit",
-            width: 300,
-            fontSize: 20,
+            width: isSmallScreen ? "73%" : 300,
+            fontSize: isSmallScreen ? 14 : 20,
           }}
         >
           CEKI
@@ -483,15 +527,26 @@ const Index = () => {
             <Typography
               p={4}
               py={2}
-              variant="h5"
+              variant={isSmallScreen ? "h6" : "h5"}
               fontFamily="Outfit"
               color="#12B5E5"
+              sx={{
+                transform: isSmallScreen ? "scale(1.1)" : "",
+                animation: isSmallScreen
+                  ? "zoomAnimation 2s infinite alternate"
+                  : "none",
+              }}
             >
-              useResult
+              Result
             </Typography>
           </Box>
           <Box display={"flex"} justifyContent={"center"}>
-            <Typography pl={4} py={0} variant="h5" fontFamily="Outfit">
+            <Typography
+              pl={4}
+              py={0}
+              variant={isSmallScreen ? "h6" : "h5"}
+              fontFamily="Outfit"
+            >
               {desa1Name || "Desa 1"}
             </Typography>
             <Typography
@@ -505,30 +560,51 @@ const Index = () => {
               <Commit />
               <East />
             </Typography>
-            <Typography ml={2} pr={4} variant="h5" fontFamily={"Outfit"}>
+            <Typography
+              ml={2}
+              pr={4}
+              variant={isSmallScreen ? "h6" : "h5"}
+              fontFamily={"Outfit"}
+            >
               {desa2Name || "Desa 2"}
             </Typography>
           </Box>
           <Box mt={2} display={"flex"} justifyContent={"center"}>
-            <Typography pl={4} variant="h4" fontFamily="Outfit" color="#12B5E5">
+            <Typography
+              variant={isSmallScreen ? "h5" : "h4"}
+              fontFamily="Outfit"
+              color="#12B5E5"
+            >
               ≈
             </Typography>
-            <Typography pl={1} variant="h4" fontFamily={"Outfit"}>
+            <Typography
+              pl={1}
+              variant={isSmallScreen ? "h5" : "h4"}
+              fontFamily={"Outfit"}
+            >
               {CheckDistance() ? (
                 CheckDistance().toFixed(2)
               ) : (
                 <Skeleton width={100} />
               )}
             </Typography>
-            <Typography ml={1} variant="h4">
+            <Typography ml={1} variant={isSmallScreen ? "h5" : "h4"}>
               Km
             </Typography>
           </Box>
           <Box display={"flex"} justifyContent={"center"}>
-            <Typography pl={4} variant="h4" fontFamily="Outfit" color="#12B5E5">
+            <Typography
+              variant={isSmallScreen ? "h5" : "h4"}
+              fontFamily="Outfit"
+              color="#12B5E5"
+            >
               ≈
             </Typography>
-            <Typography pl={1} variant="h4" fontFamily={"Outfit"}>
+            <Typography
+              pl={1}
+              variant={isSmallScreen ? "h5" : "h4"}
+              fontFamily={"Outfit"}
+            >
               {CheckDistance() ? (
                 (CheckDistance() * 1000).toFixed(2)
               ) : (
@@ -536,7 +612,7 @@ const Index = () => {
               )}
             </Typography>
 
-            <Typography ml={1} variant="h4">
+            <Typography ml={1} variant={isSmallScreen ? "h5" : "h4"}>
               m
             </Typography>
           </Box>
