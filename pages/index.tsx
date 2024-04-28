@@ -384,7 +384,10 @@ const Index = () => {
           {isSmallScreen ? (
             <ImportExport fontSize="medium" />
           ) : (
-            <ImportExport fontSize="large" />
+            <ImportExport
+              sx={{ transform: "rotate(90deg)" }}
+              fontSize="large"
+            />
           )}
         </Box>
         <Box
