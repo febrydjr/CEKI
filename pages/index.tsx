@@ -99,14 +99,6 @@ const Index = () => {
     return distance;
   };
 
-  const handleAlert = () => {
-    alert(
-      `Distance between ${desa1Name} and ${desa2Name}: ${CheckDistance().toFixed(
-        2
-      )} km`
-    );
-  };
-
   // Fetching Provinsi 1 data
   const fetchProvinsi1 = async () => {
     try {
@@ -392,7 +384,7 @@ const Index = () => {
           {isSmallScreen ? (
             <ImportExport fontSize="medium" />
           ) : (
-            <ArrowForwardIos fontSize="large" />
+            <ImportExport fontSize="large" />
           )}
         </Box>
         <Box
@@ -502,7 +494,6 @@ const Index = () => {
           color="secondary"
           onClick={async () => {
             handleCekiButtonClick();
-            // handleAlert();
           }}
           sx={{
             fontFamily: "Outfit",
